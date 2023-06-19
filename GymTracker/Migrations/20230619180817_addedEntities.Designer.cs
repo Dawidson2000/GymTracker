@@ -4,6 +4,7 @@ using GymTracker.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymTracker.Migrations
 {
     [DbContext(typeof(GymTrackerContext))]
-    partial class GymTrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20230619180817_addedEntities")]
+    partial class addedEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,7 +137,7 @@ namespace GymTracker.Migrations
                         .IsRequired();
 
                     b.HasOne("GymTracker.Entities.WorkoutEntity", null)
-                        .WithMany("WorkoutExercises")
+                        .WithMany("Workouts")
                         .HasForeignKey("WorkoutEntityId");
 
                     b.Navigation("Exercise");
@@ -142,7 +145,7 @@ namespace GymTracker.Migrations
 
             modelBuilder.Entity("GymTracker.Entities.WorkoutEntity", b =>
                 {
-                    b.Navigation("WorkoutExercises");
+                    b.Navigation("Workouts");
                 });
 
             modelBuilder.Entity("GymTracker.Entities.WorkoutExerciseEntity", b =>
