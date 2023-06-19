@@ -1,3 +1,6 @@
+using GymTracker.Entities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Database
+builder.Services.AddDbContext<GymTrackerContext>(
+    option => option
+    .UseSqlServer(builder.Configuration.GetConnectionString("GymTrackerConnectionString")));
+
 
 var app = builder.Build();
 
